@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Basics | Modern Learning Platform</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1729 100%);
+            color: #e0e7ff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .orb1 {
+            width: 400px;
+            height: 400px;
+            background: #3b82f6;
+            top: -100px;
+            left: -100px;
+            animation-delay: 0s;
+        }
+
+        .orb2 {
+            width: 350px;
+            height: 350px;
+            background: #8b5cf6;
+            bottom: -100px;
+            right: -100px;
+            animation-delay: 5s;
+        }
+
+        .orb3 {
+            width: 300px;
+            height: 300px;
+            background: #06b6d4;
+            top: 50%;
+            left: 50%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            33% {
+                transform: translate(100px, -100px) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-100px, 100px) scale(0.9);
+            }
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(10, 14, 39, 0.95) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.7) !important;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: #667eea !important;
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            color: #667eea !important;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6, #06b6d4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 1rem;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: #94a3b8;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .badge-container {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .badge {
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+
+        .badge-primary {
+            background: rgba(59, 130, 246, 0.2);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .badge-success {
+            background: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+        }
+
+        .badge-warning {
+            background: rgba(245, 158, 11, 0.2);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .badge-purple {
+            background: rgba(139, 92, 246, 0.2);
+            color: #a78bfa;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-outline {
+            background: rgba(255, 255, 255, 0.05);
+            color: #e0e7ff;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Glass Card */
+        .glass-card {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #e0e7ff, #cbd5e1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .section-subtitle {
+            color: #94a3b8;
+            font-size: 1.125rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Grid Layouts */
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        }
+
+        /* Code Block */
+        .code-block {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            color: #06b6d4;
+            overflow-x: auto;
+        }
+
+        .output-block {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 12px;
+            padding: 1rem;
+            margin: 1rem 0;
+            color: #60a5fa;
+        }
+
+        /* Table */
+        .modern-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(20px);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .modern-table th {
+            background: rgba(59, 130, 246, 0.2);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: #e0e7ff;
+        }
+
+        .modern-table td {
+            padding: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: #cbd5e1;
+        }
+
+        .modern-table tr:hover {
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 20px;
+            height: 12px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+            border-radius: 20px;
+            animation: progressAnim 2s ease-out;
+        }
+
+        @keyframes progressAnim {
+            from {
+                width: 0;
+            }
+        }
+
+        /* Icon */
+        .icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(15, 23, 42, 0.8);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            text-align: center;
+            color: #94a3b8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .grid-3,
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll Animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+        <div class="orb orb3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">🐍 LearnPython</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#Home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#intro">Intro</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#concepts">Concepts</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#python">Python</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#basics">Basics</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#variables">Variables</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#datatypes">Data Types</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#conversion">Conversion</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#practice">Practice</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#quiz">Quiz</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Python Basics for Beginners</h1>
+        <p class="hero-subtitle">
+            Learn Programming Concepts, Python Overview, Variables and Data Types with simple theory, examples, and
+            outputs.
+        </p>
+
+        <div class="badge-container">
+            <span class="badge badge-primary">Beginner Friendly</span>
+            <span class="badge badge-warning">Theory Focus</span>
+            <span class="badge badge-success">Examples + Output</span>
+            <span class="badge badge-purple">Interactive Design</span>
+        </div>
+
+        <div class="cta-buttons">
+            <a href="#intro" class="btn btn-primary">Start Learning</a>
+            <a href="#quiz" class="btn btn-outline">Take Quiz</a>
+        </div>
+
+        <div class="container">
+            <div class="glass-card" style="max-width: 600px; margin: 0 auto;">
+                <h3 style="margin-bottom: 1rem;">Website Goal</h3>
+                <p style="color: #94a3b8; margin-bottom: 1rem;">
+                    To revise Python basics and improve theoretical understanding using a clean, modern educational
+                    interface.
+                </p>
+                <div class="progress-container">
+                    <div class="progress-bar" style="width: 35%"></div>
+                </div>
+                <small style="color: #64748b;">Progress will improve as you practice 🚀</small>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction -->
+    <section id="intro" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Introduction</h2>
+                <p class="section-subtitle">
+                    Programming means writing instructions for a computer. Python is a popular language because it is
+                    simple, powerful, and used in many real-world applications.
+                </p>
+            </div>
+
+            <div class="grid grid-3">
+                <div class="glass-card fade-in">
+                    <div class="icon">🎯</div>
+                    <h3>Project Objective</h3>
+                    <p style="color: #94a3b8;">
+                        Understand Python basics like variables, data types and conversion with examples and outputs.
+                    </p>
+                </div>
+
+                <div class="glass-card fade-in" style="animation-delay: 0.1s;">
+                    <div class="icon">📌</div>
+                    <h3>What You Will Learn</h3>
+                    <p style="color: #94a3b8;">
+                        Programming concepts, Python overview, syntax, variables, data types, and practice questions.
+                    </p>
+                </div>
+
+                <div class="glass-card fade-in" style="animation-delay: 0.2s;">
+                    <div class="icon">🧠</div>
+                    <h3>Why Learn Python?</h3>
+                    <p style="color: #94a3b8;">
+                        Python is used in web development, automation testing, AI, data science, cybersecurity, and
+                        more.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Programming Concepts -->
+    <section id="concepts" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Programming Concepts</h2>
+                <p class="section-subtitle">These are the foundation for every programming language.</p>
+            </div>
+
+            <div class="grid grid-2">
+                <div class="glass-card">
+                    <h3>💡 What is Programming?</h3>
+                    <p style="color: #94a3b8;">Writing instructions to solve problems (Apps, ATM, Websites).</p>
+                </div>
+
+                <div class="glass-card">
+                    <h3>⚙️ Algorithm</h3>
+                    <p style="color: #94a3b8;">Step-by-step method to solve a problem logically.</p>
+                </div>
+
+                <div class="glass-card">
+                    <h3>📊 Flowchart</h3>
+                    <p style="color: #94a3b8;">Diagram that shows the steps of solving a problem.</p>
+                </div>
+
+                <div class="glass-card">
+                    <h3>🐛 Debugging</h3>
+                    <p style="color: #94a3b8;">Finding & fixing errors like SyntaxError / IndentationError.</p>
+                </div>
+            </div>
+
+            <div class="glass-card" style="margin-top: 2rem;">
+                <h3 style="margin-bottom: 1.5rem;">Quick Check (Mini Quiz)</h3>
+                <div class="grid grid-3">
+                    <div>
+                        <strong>1) What is an algorithm?</strong>
+                        <p style="color: #94a3b8; margin-top: 0.5rem;">A step-by-step solution</p>
+                    </div>
+                    <div>
+                        <strong>2) What is debugging?</strong>
+                        <p style="color: #94a3b8; margin-top: 0.5rem;">Fixing errors in code</p>
+                    </div>
+                    <div>
+                        <strong>3) What is a flowchart?</strong>
+                        <p style="color: #94a3b8; margin-top: 0.5rem;">A diagram of steps</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Python Overview -->
+    <section id="python" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Python Overview</h2>
+                <p class="section-subtitle">
+                    Python is a high-level interpreted language created by Guido van Rossum. It is beginner-friendly and
+                    powerful.
+                </p>
+            </div>
+
+            <div class="glass-card" style="overflow-x: auto;">
+                <table class="modern-table">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Meaning</th>
+                            <th>Why It Matters</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="badge badge-primary">High-level</span></td>
+                            <td>Easy to understand</td>
+                            <td>Beginners can learn quickly</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-success">Interpreted</span></td>
+                            <td>Runs line-by-line</td>
+                            <td>Easy debugging & testing</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-warning">Portable</span></td>
+                            <td>Runs on all OS</td>
+                            <td>Works on Windows/Linux/Mac</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge badge-purple">Community</span></td>
+                            <td>Large support base</td>
+                            <td>Easy to find solutions & libraries</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="grid grid-3" style="margin-top: 2rem;">
+                <div class="glass-card">
+                    <h3>🌐 Web Development</h3>
+                    <p style="color: #94a3b8;">Django, Flask for building websites and APIs.</p>
+                </div>
+
+                <div class="glass-card">
+                    <h3>🤖 Automation Testing</h3>
+                    <p style="color: #94a3b8;">Selenium + PyTest for automation scripts and testing.</p>
+                </div>
+
+                <div class="glass-card">
+                    <h3>🧬 AI / ML</h3>
+                    <p style="color: #94a3b8;">Used in machine learning applications and data science.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Python Basics -->
+    <section id="basics" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Python Basics (Your First Program)</h2>
+                <p class="section-subtitle">Start with Hello World, then understand syntax rules and comments.</p>
+            </div>
+
+            <div class="glass-card">
+                <h3 style="margin-bottom: 1.5rem;">Hello World Program</h3>
+
+                <div class="grid grid-2">
+                    <div>
+                        <h4 style="margin-bottom: 0.5rem; color: #60a5fa;">Code:</h4>
+                        <div class="code-block">print("Hello World")</div>
+                    </div>
+                    <div>
+                        <h4 style="margin-bottom: 0.5rem; color: #34d399;">Output:</h4>
+                        <div class="output-block">Hello World</div>
+                    </div>
+                </div>
+
+                <div class="code-block" style="margin-top: 1rem;">
+                    $ python hello.py<br>
+                    Hello World
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Variables -->
+    <section id="variables" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Variables in Python</h2>
+                <p class="section-subtitle">
+                    A variable is a name used to store data. Python creates variables when you assign values.
+                </p>
+            </div>
+
+            <div class="grid grid-2">
+                <div class="glass-card">
+                    <h3>Example 1: Store a Value</h3>
+                    <div class="code-block">city = "Kochi"<br>print(city)</div>
+                    <div class="output-block">Kochi</div>
+                </div>
+
+                <div class="glass-card">
+                    <h3>Example 2: Update Value</h3>
+                    <div class="code-block">x = 10<br>x = 20<br>print(x)</div>
+                    <div class="output-block">20</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Types -->
+    <section id="datatypes" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Data Types in Python</h2>
+                <p class="section-subtitle">
+                    Data type defines what kind of value the variable holds. Example: number, decimal, text, true/false.
+                </p>
+            </div>
+
+            <div class="glass-card" style="overflow-x: auto; margin-bottom: 2rem;">
+                <table class="modern-table">
+                    <thead>
+                        <tr>
+                            <th>Data Type</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>int</td>
+                            <td>10</td>
+                        </tr>
+                        <tr>
+                            <td>float</td>
+                            <td>10.5</td>
+                        </tr>
+                        <tr>
+                            <td>complex</td>
+                            <td>2+3j</td>
+                        </tr>
+                        <tr>
+                            <td>str</td>
+                            <td>"Hello"</td>
+                        </tr>
+                        <tr>
+                            <td>bool</td>
+                            <td>True</td>
+                        </tr>
+                        <tr>
+                            <td>list</td>
+                            <td>[1,2,3]</td>
+                        </tr>
+                        <tr>
+                            <td>tuple</td>
+                            <td>(1,2,3)</td>
+                        </tr>
+                        <tr>
+                            <td>set</td>
+                            <td>{1,2,3}</td>
+                        </tr>
+                        <tr>
+                            <td>dict</td>
+                            <td>{"a":1}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="grid grid-3">
+                <div class="glass-card">
+                    <h3>int (Integer)</h3>
+                    <p style="color: #94a3b8; margin-bottom: 1rem;">Stores whole numbers (no decimals).</p>
+                    <div class="code-block">age = 21<br>print(type(age))</div>
+                    <div class="output-block">&lt;class 'int'&gt;</div>
+                </div>
+
+                <div class="glass-card">
+                    <h3>float (Decimal)</h3>
+                    <p style="color: #94a3b8; margin-bottom: 1rem;">Stores numbers with decimal points.</p>
+                    <div class="code-block">price = 99.5<br>print(type(price))</div>
+                    <div class="output-block">&lt;class 'float'&gt;</div>
+                </div>
+
+                <div class="glass-card">
+                    <h3>complex (Complex)</h3>
+                    <p style="color: #94a3b8; margin-bottom: 1rem;">Stores numbers with real + imaginary (j).</p>
+                    <div class="code-block">num = 2+3j<br>print(type(num))</div>
+                    <div class="output-block">&lt;class 'complex'&gt;</div>
+                </div>
+
+                <div class="glass-card">
+                    <h3>str (String)</h3>
+                    <p style="color: #94a3b8; margin-bottom: 1rem;">Stores text inside quotes.</p>
+                    <div class="code-block">name = "Python"<br>print(type(name))</div>
+                    <div class="output-block">&lt;class 'str'&gt;</div>
+                </div>
+
+                <div class="glass-card">
+                    <h3>bool (Boolean)</h3>
+                    <p style="color: #94a3b8; margin-bottom: 1rem;">Stores True or False.</p>
+                    <div class="code-block">is_student = True<br>print(type(is_student))</div>
+                    <div class="output-block">&lt;class 'bool'&gt;</div>
+                </div>
+
+                <div class="glass-card">
+                    <h3>list (List)</h3>
+                    <p style="color: #94a3b8; margin-bottom: 1rem;">Stores multiple values (mutable).</p>
+                    <div class="code-block">nums = [1,2,3]<br>print(type(nums))</div>
+                    <div class="output-block">&lt;class 'list'&gt;</div>
+                </div>
+
+                <div class="glass-card">
+                    <h3>tuple (Tuple)</h3>
+                    <p style="color: #94a3b8; margin-bottom: 1rem;">Stores multiple values (immutable).</p>
+                    <div class="code-block">t = (1,2,3)<br>print(type(t))</div>
+                    <div class="output-block">&lt;class 'tuple'&gt;</div>
+                </div>
+
+                <div class="glass-card">
+                    <h3>set (Set)</h3>
+                    <p style="color: #94a3b8; margin-bottom: 1rem;">Stores unique values.</p>
+                    <div class="code-block">s = {1,2,3}<br>print(type(s))</div>
+                    <div class="output-block">&lt;class 'set'&gt;</div>
+                </div>
+
+                <div class="glass-card">
+                    <h3>dict (Dictionary)</h3>
+                    <p style="color: #94a3b8; margin-bottom: 1rem;">Stores data in key-value pairs.</p>
+                    <div class="code-block">d = {"a":1}<br>print(type(d))</div>
+                    <div class="output-block">&lt;class 'dict'&gt;</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Type Conversion -->
+    <section id="conversion" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Type Conversion</h2>
+                <p class="section-subtitle">Changing one data type into another type.</p>
+            </div>
+
+            <div class="grid grid-2">
+                <div class="glass-card">
+                    <h3>Implicit Conversion</h3>
+                    <p style="color: #94a3b8; margin-bottom: 1rem;">Python automatically converts type when needed.</p>
+                    <div class="code-block">a = 5<br>b = 2.5<br>c = a + b<br>print(type(c))</div>
+                    <div class="output-block">&lt;class 'float'&gt;</div>
+                </div>
+
+                <div class="glass-card">
+                    <h3>Explicit Conversion</h3>
+                    <p style="color: #94a3b8; margin-bottom: 1rem;">You manually convert the type using functions.</p>
+                    <div class="code-block">x = "10"<br>y = int(x)<br>print(type(y))</div>
+                    <div class="output-block">&lt;class ' int'&gt;</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Practice Section -->
+    <section id="practice" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Practice Questions</h2>
+                <p class="section-subtitle">Test your understanding with these simple exercises.</p>
+            </div>
+
+            <div class="glass-card">
+                <h3 style="margin-bottom: 1.5rem;">Questions:</h3>
+                <ol style="color: #cbd5e1;">
+                    <li>Write a Python program to print "Hello, Python!"</li>
+                    <li>Create a variable named 'age' and assign it your age.</li>
+                    <li>What data type is the value 3.14?</li>
+                    <li>Convert the string "25" to an integer.</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+    <!-- Quiz Section -->
+    <section id="quiz" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Quick Quiz</h2>
+                <p class="section-subtitle">Check your knowledge with this short quiz.</p>
+            </div>
+
+            <div class="glass-card">
+                <h3 style="margin-bottom: 1.5rem;">Quiz Questions:</h3>
+                <ol style="color: #cbd5e1;">
+                    <li>What is the output of print(2 + 3 * 4)?</li>
+                    <li>Which data type is used to store text in Python?</li>
+                    <li>How do you create a variable in Python?</li>
+                    <li>What function is used to convert a value to an integer?</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Modern Learning Platform. All rights reserved.</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ"
+        crossorigin="anonymous"></script>
+</body>
+</html>
+ 
